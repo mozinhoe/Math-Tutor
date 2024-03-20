@@ -1,0 +1,241 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+using namespace std;
+
+char topic(char);
+void addition(int, int, int, int);
+void subtraction(int, int, int, int);
+void multiplication(int, int, int, int);
+void division(int, int, int, int);
+void changeTopic(char);
+
+
+int main() {
+char chosenTopic = 0; 
+int random = 0, random2 = 0, answer = 0, correct = 0;
+  
+  cout << "Welcome to math tutor!" << endl;
+  
+  // Calling Topic function
+  chosenTopic = topic (chosenTopic);
+ 
+  // Converts lowercase to upper
+  chosenTopic = toupper (chosenTopic);
+
+  // Gives question from these choices
+  switch (chosenTopic){
+    case 'A':
+      addition(random, random2, answer, correct);
+      break;
+    case 'S':
+      subtraction(random, random2, answer, correct);
+      break;
+    case 'M':
+      multiplication(random, random2, answer, correct);
+      break;
+    case 'D':
+      division(random, random2, answer, correct);
+      break;
+    default :
+      cout << endl << "Invalid choice" << endl;
+  }
+}
+
+
+
+// Choose topic
+char topic(char topic){
+  
+  cout << endl << "Please select a topic you would like to practice" <<endl;
+  cout << "Enter 'A' for  addition" << endl; 
+  cout << "Enter 'S' for  subraction" << endl;
+  cout << "Enter 'M' for  multiplication" << endl;
+  cout << "Enter 'D' for  divison" << endl << endl;
+
+  cin >> topic;
+
+  // Make sure correct input was entered
+  while (topic != 'a' && topic != 'A' && topic != 's' && topic != 'S' && topic != 'm' && topic != 'M' && topic != 'd' && topic != 'D') {
+    
+    cout << endl << "Invalid choice. Please enter one of the given options" << endl << endl;
+    
+    cin >> topic;
+  }
+
+  return topic;
+}
+
+
+
+// Addition Question
+void addition(int random, int random2, int answer, int correctAnswer){
+  
+  // To generate new number everytime
+  int x = time(0);
+  srand(x);
+ 
+  char userChoice = 0;
+
+
+  // Generate random numbers 1-1000
+    random = 1 + rand() % 1000;
+    random2 = 1 + rand() % 1000;
+
+  // Question
+    cout << endl << random << " + " << random2<< " = ";
+    cin >> answer;
+
+  // Check if answer is right or wrong
+    if (answer != random + random2){
+      correctAnswer = random + random2;
+      cout << endl << "Incorrect answer. The answer is " << correctAnswer <<   endl;
+    }
+
+  // Right answer
+    else {
+      cout << endl << "Well done!" << endl; 
+  }
+  
+  // For another question or change topic
+  changeTopic(userChoice);
+  
+}
+
+
+
+// Subtraction Question
+void subtraction(int random, int random2, int answer, int correctAnswer){
+  
+  // To generate new number everytime
+  int x = time(0);
+  srand(x);
+
+  char userChoice = 0;
+
+  // Generate random numbers 1-1000
+    random2 = 1 + rand() % 1000;
+    random = random2 + rand() % 1000; // to ensure random > random2
+
+  // Question
+    cout << endl << random << " - " << random2<< " = ";
+    cin >> answer;
+
+  // Check if answer is right or wrong
+    if (answer != random - random2){
+      correctAnswer = random - random2;
+      cout << endl << "Incorrect answer. The answer is " << correctAnswer <<   endl;
+    }
+
+  // Right answer
+    else {
+      cout << endl << "Well done!" << endl; 
+  }
+
+  // For another question or change topic
+  changeTopic(userChoice);
+  
+}
+
+
+
+// Multiplication Question
+void multiplication(int random, int random2, int answer, int correctAnswer){
+  
+  // To generate new number everytime
+  int x = time(0);
+  srand(x);
+
+  char userChoice = 0;
+
+  // Generate random numbers 1-1000
+    random2 = 1 + rand() % 100;
+    random = 1 + rand() % 100; 
+
+  // Question
+    cout << endl << random << " x " << random2<< " = ";
+    cin >> answer;
+
+  // Check if answer is right or wrong
+    if (answer != random * random2){
+      correctAnswer = random * random2;
+      cout << endl << "Incorrect answer. The answer is " << correctAnswer <<   endl;
+    }
+
+  // Right answer
+    else {
+      cout << endl << "Well done!" << endl; 
+  }
+
+  // For another question or change topic
+  changeTopic(userChoice);
+  
+}
+
+
+
+// Division Question
+void division(int random, int random2, int answer, int correctAnswer){
+
+  // To generate new number everytime
+  int x = time(0);
+  srand(x);
+
+  char userChoice = 0;
+
+  // Generate random numbers 1-1000
+    random2 = 1 + rand() % 99;
+    random = random2 * (1+ rand() % 100); // to ensure ran2 is multiple of ran
+
+   // Question
+      cout << endl << random << " / " << random2<< " = ";
+      cin >> answer;
+
+    // Check if answer is right or wrong
+      if (answer != random / random2){
+        correctAnswer = random / random2;
+        cout << endl << "Incorrect answer. The answer is " << correctAnswer <<   endl;
+      }
+
+    // Right answer
+      else {
+        cout << endl << "Well done!" << endl; 
+    }
+
+    // For another question or change topic
+    changeTopic(userChoice);
+
+  }
+
+
+
+void changeTopic(char userChoice){
+  int random = 0, random2 = 0, answer = 0, correct = 0;
+
+  cout << endl << "Would you like to try another question?" << endl;
+  cout << "Enter 'A', 'S', 'M' or 'D' for another question or to change topics" << endl;
+  cout << "Enter any other key to exist" << endl << endl;
+  
+  cin >> userChoice;
+
+  // converts lowercase to uppercase
+  userChoice = toupper (userChoice);
+  
+  switch (userChoice){
+    case 'A':
+      addition(random, random2, answer, correct);
+      break;
+    case 'S':
+      subtraction(random, random2, answer, correct);
+      break;
+    case 'M':
+      multiplication(random, random2, answer, correct);
+      break;
+    case 'D':
+      division(random, random2, answer, correct);
+      break;
+    default :
+      cout << endl << "Goodbye!" << endl;
+  }
+}
